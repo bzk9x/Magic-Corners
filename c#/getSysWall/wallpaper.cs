@@ -4,7 +4,6 @@ using System.Text;
 
 partial class Program
 {
-    // Import Windows API function
     [DllImport("user32.dll", CharSet = CharSet.Auto)]
     private static extern bool SystemParametersInfo(
         int uAction, 
@@ -18,10 +17,8 @@ partial class Program
     {
         try
         {
-            // Create buffer for wallpaper path
             StringBuilder wallpaperPath = new StringBuilder(260);
             
-            // Get the current wallpaper path
             bool success = SystemParametersInfo(SPI_GETDESKWALLPAPER, wallpaperPath.Capacity, wallpaperPath, 0);
             
             if (success)
@@ -29,24 +26,21 @@ partial class Program
                 string path = wallpaperPath.ToString();
                 if (!string.IsNullOrEmpty(path))
                 {
-                    Console.WriteLine($"Current wallpaper path: {path}");
+                    Console.WriteLine(path);
                 }
                 else
                 {
-                    Console.WriteLine("No custom wallpaper is currently set (using default)");
+                    Console.WriteLine("");
                 }
             }
             else
             {
-                Console.WriteLine("Failed to get wallpaper path");
+                Console.WriteLine("");
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine("");
         }
-        
-        Console.WriteLine("\nPress any key to exit...");
-        Console.ReadKey();
     }
 }

@@ -9,6 +9,8 @@ function createWindow() {
     maximizable: false,
     resizable: false,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     }
   });
@@ -31,5 +33,3 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
-console.log("Built by tiwa");
